@@ -36,18 +36,21 @@ and cannot be shrunk.
 The Rust compiler currently supports two wasm-related targets:
 
 - `wasm32-unknown-unknown`. This target compiles directly to wasm using the LLVM
-  back-end. It's appropriate when you're compiling pure Rust code, i.e. you have
+  back-end. It's what we're primarily working on and expect to be most important
+  for Rust. It's appropriate when you're compiling pure Rust code, i.e. you have
   no C dependencies. Compared to the emscripten target, it produces much leaner
   code by default and is much easier to set
   up. [Here's how to set it up](https://www.hellorust.com/setup/wasm-target/).
 
 - `wasm32-unknown-emscripten`. This target compiles to wasm via the emscripten
-  toolchain. It's what you should use if you have C dependencies, including
+  toolchain. Its long-term role in the Rust project is to provide a wasm
+  target that supports a synthetic implementation of libc. It's what you
+  should use if you have C dependencies, including
   libc. [Here's how to set it up](https://www.hellorust.com/setup/emscripten/).
 
 The `wasm32-unknown-unknown` is particularly promising for integrating bits of
 "greenfield" Rust code into JS projects. However, it is also the less mature
-backend:
+backend at the moment:
 
 - It [only supports compiling with optimizations on](https://github.com/aturon/rust-wasm/issues/1).
 - It [requires compiling with a single, massive compilation unit](https://github.com/aturon/rust-wasm/issues/2).
